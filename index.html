@@ -81,6 +81,35 @@
     <p class="privacy" style="margin-top:.6rem;"><strong>Why this matters:</strong> a .lnk file can reveal more than its target. Windows embeds a "tracker" block with the machine name and internal disk identifiers where the shortcut was created, which is sometimes used in digital forensics and incident response to trace where a file or shortcut originated.</p>
   </div>
 
+
+  <div class="card faq">
+    <h2>Reading a .lnk file on Mac or Linux</h2>
+    <p class="privacy">A <code>.lnk</code> shortcut only makes sense to double-click on Windows, but the file format itself (Microsoft's published MS-SHLLINK specification) is just a documented binary layout &mdash; nothing here requires Wine, a Windows VM, or any Windows-only tooling. Drop the file in above from any operating system and this page reads it directly.</p>
+  </div>
+
+  <div class="card faq">
+    <h2>Is my .lnk file safe to open?</h2>
+    <p class="privacy">A shortcut can carry more than its visible icon suggests: a working directory, command-line arguments, and an optional "tracker" block recording the machine it was created on. Some malware abuses exactly this &mdash; a shortcut disguised as a document (for example, <code>invoice.pdf.lnk</code>, which Windows may display as if it were just "invoice.pdf") that actually launches PowerShell with hidden arguments when double-clicked. This page only <em>reads</em> the file's fields to display them; it never executes a shortcut's target or arguments, so it's safe to inspect a suspicious .lnk file here before deciding whether to run it at all.</p>
+  </div>
+
+  <div class="card faq">
+    <h2>Troubleshooting</h2>
+    <details><summary>The "tracker" section is empty</summary>
+      <p>This optional block (NetBIOS machine name, volume serial number, and similar identifiers) is only written by some Windows versions and configurations. Its absence is normal and doesn't indicate a parsing problem.</p>
+    </details>
+    <details><summary>The target path shows an old-style 8.3 DOS name</summary>
+      <p>Some .lnk files store a legacy short path (like <code>PROGRA~1</code>) alongside a full Unicode path in a separate extra-data block. This page shows both when both are present in the file.</p>
+    </details>
+  </div>
+
+  <div class="card cli">
+    <h2>Prefer the command line?</h2>
+    <div class="cli-block">pip install LnkParse3
+lnkparse file.lnk</div>
+    <p class="privacy"><code>LnkParse3</code> is a cross-platform Python library; <code>exiftool file.lnk</code> also reads the basics on Mac, Linux, or Windows.</p>
+  </div>
+
+
   <div id="ad-slot" data-aads-unit="2455593"></div>
 </main>
 <script type="module" src="app.js"></script>
