@@ -55,6 +55,30 @@
   .privacy{font-size:.85rem;color:var(--muted);}
   .privacy strong{color:var(--text);}
 </style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "The \"tracker\" section is empty",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "This optional block (NetBIOS machine name, volume serial number, and similar identifiers) is only written by some Windows versions and configurations. Its absence is normal and doesn't indicate a parsing problem."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "The target path shows an old-style 8.3 DOS name",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Some .lnk files store a legacy short path (like PROGRA~1 ) alongside a full Unicode path in a separate extra-data block. This page shows both when both are present in the file."
+      }
+    }
+  ]
+}
+</script>
 </head>
 <body>
 <header>
